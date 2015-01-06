@@ -1,0 +1,130 @@
+<head>
+<style>
+  body {background-image:url('../images/homeBackground.jpg');}
+  h1   {color:blue}
+  p    {color:green}
+</style>
+</head>
+
+<%= bootstrap_form_tag url: '/index' do |f| %>
+  <%= f.text_field  :user %>
+  <%= f.submit %>
+<% end %>
+
+<%= form_tag("/index", method: "get") do %>
+  <%= label_tag(:user, "User:") %>
+  <%= text_field_tag(:user) %>
+  <%= label_tag(:movie, "Movie:") %>
+  <%= text_field_tag(:movie) %>
+  <%= label_tag(:rating, "Rating:") %>
+  <%= text_field_tag(:rating) %>
+  <%= label_tag(:review, "Review:") %>
+  <%= text_field_tag(:review) %>
+  <%= submit_tag("Rate") %>
+<% end %>
+
+<%= form_tag("/index", method: "get") do %>
+  <%= label_tag(:q, "Enter New User:") %>
+  <%= text_field_tag(:newuser) %>
+  <%= submit_tag("Create User") %>
+<% end %>
+
+<%= form_tag("/index", method: "get") do %>
+  <%= label_tag(:viewuser, "") %>
+  <%= text_field_tag(:viewuser) %>
+  <%= submit_tag("View User") %>
+<% end %>
+
+<%= form_tag("/index", method: "get") do %>
+  <%= label_tag(:curUser, "Current User") %>
+  <%= text_field_tag(:curUser) %>
+  <%= label_tag(:friendUser, "New Friend") %>
+  <%= text_field_tag(:friendUser) %>
+  <%= submit_tag("Add Friend") %>
+<% end %>
+
+<%= form_tag("/index", method: "get") do %>
+  <%= label_tag(:userFriendSearch, "User") %>
+  <%= text_field_tag(:userFriendSearch) %>
+  <%= submit_tag("View Friend Reviews") %>
+<% end %>
+
+<%= form_tag("/index", method: "get") do %>
+  <%= label_tag(:q, "Enter Movie Title:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<%= form_tag("/index", method: "get") do %>
+  <%= label_tag(:songSearch, "Enter Song Title:") %>
+  <%= text_field_tag(:songSearch) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<%= form_tag("/index", method: "get") do %>
+  <%= label_tag(:gameSearch, "Enter Game Title:") %>
+  <%= text_field_tag(:gameSearch) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<%= form_tag("/index", method: "get") do %>
+  <%= label_tag(:hotelSearchName, "Enter Hotel:") %>
+  <%= text_field_tag(:hotelSearchName) %>
+   <%= label_tag(:hotelSearchDestination, "Enter Hotel City:") %>
+   <%= text_field_tag(:hotelSearchDestination) %>
+   <%= submit_tag("Search") %>
+<% end %>
+
+<% if (defined? @jsonObj != nil) then %>
+<h2>Movie Name: <%= @jsonObj['Title']	 %></h2>
+<h2>IMBD Rating: <%= @jsonObj['imdbRating'] %></h2>
+<h2>Rotten Rating: <%= @rottenMovie.ratings.critics_score %></h2>
+<h2>Blast Rating: <%= @netRating %></h2>
+<% end %>
+<% if (defined? @newUser != nil) then %>
+<h2>New User Name: <%= @newUser %></h2>
+<% end %>
+
+<% if (defined? @hotelRating != nil) then %>
+<h2>Hotel Name: <%= @hotelName	 %></h2>
+<h2>Hotel Rating: <%= @hotelRating	 %></h2>
+<% end %>
+
+<% if (defined? @friendRatings != nil) then %>
+<h2>User Friend Reviews:</h2>
+<table>
+  <tr>                          
+    <th>Friend</th>
+    <th>Movie</th>
+	<th>Rating</th>
+  </tr>
+<% @friendRatings.each do |friend| %>
+  <tr>
+    <td><%= friend[0] %></td>  
+    <td><%= friend[1] %></td>  
+    <td><%= friend[2] %></td>
+    <td><%= friend[3] %></td>
+  </tr>
+<% end %>
+</table> 
+<% end %>
+
+<% if (defined? @user != nil) then %>
+<h2>TESTUSER: <%= @user %></h2>
+<% end %>
+<% if (defined? @allUserRatings != nil) then %>
+<table>                         
+  <tr>                          
+    <th>Movie</th>
+    <th>Rating</th>
+	<th>Review</th>
+  </tr>
+<% @allUserRatings.each do |data| %> 
+  <tr>
+    <td><%= data.movie %></td>  
+    <td><%= data.rating %></td>  
+    <td><%= data.review %></td> 
+  </tr>
+<% end %>                        
+</table> 
+<% end %>  
